@@ -1,0 +1,25 @@
+<h2>Payment Status Update</h2>
+
+<p>Hello {{name}},</p>
+
+<p>We wanted to inform you about the status of your recent payment related to your order <strong>#{{orderNumber}}</strong>.</p>
+
+<ul>
+  <li><strong>Payment Status:</strong> {{paymentStatus}}</li>
+  <li><strong>Amount:</strong> KES {{amount}}</li>
+  <li><strong>Payment Method:</strong> {{paymentMethod}}</li>
+  <li><strong>Transaction ID:</strong> {{transactionId}}</li>
+  <li><strong>Date:</strong> {{paymentDate}}</li>
+</ul>
+
+{{#if isSuccessful}}
+  <p>Your payment was successful. We're now processing your order and will notify you once it's shipped.</p>
+{{else}}
+  <p>Unfortunately, your payment was <strong>{{paymentStatus}}</strong>. Please retry the payment or contact support for assistance.</p>
+{{/if}}
+
+<p>If you have any questions, feel free to reach out to our support team at <a href="mailto:{{supportEmail}}">{{supportEmail}}</a>.</p>
+
+<p>Thank you for choosing KickKart!</p>
+
+<p>— The KickKart Team</p>

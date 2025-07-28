@@ -1,0 +1,41 @@
+<h2>Order Confirmation</h2>
+
+<p>Hello {{name}},</p>
+
+<p>Thank you for shopping with <strong>KickKart</strong>! Your order <strong>#{{orderNumber}}</strong> has been successfully placed on <strong>{{orderDate}}</strong>.</p>
+
+<p>Here are the details of your order:</p>
+
+<ul>
+  <li><strong>Shipping Address:</strong> {{shippingAddress}}</li>
+  <li><strong>Billing Address:</strong> {{billingAddress}}</li>
+  <li><strong>Total Items:</strong> {{totalItems}}</li>
+  <li><strong>Total Cost:</strong> KES {{totalCost}}</li>
+  <li><strong>Estimated Delivery:</strong> {{estimatedDelivery}}</li>
+</ul>
+
+<h3>Order Items:</h3>
+<table style="width:100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="text-align:left; padding: 8px; border-bottom: 1px solid #ddd;">Item</th>
+      <th style="text-align:left; padding: 8px; border-bottom: 1px solid #ddd;">Quantity</th>
+      <th style="text-align:left; padding: 8px; border-bottom: 1px solid #ddd;">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each orderItems}}
+      <tr>
+        <td style="padding: 8px; border-bottom: 1px solid #eee;">{{name}}</td>
+        <td style="padding: 8px; border-bottom: 1px solid #eee;">{{quantity}}</td>
+        <td style="padding: 8px; border-bottom: 1px solid #eee;">KES {{price}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<p>You can track your order and view more details by logging into your account.</p>
+
+<p>If you have any questions, feel free to contact us at <a href="mailto:{{supportEmail}}">{{supportEmail}}</a>.</p>
+
+<p>We appreciate your business!<br>— The KickKart Team</p>

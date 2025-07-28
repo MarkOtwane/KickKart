@@ -24,6 +24,8 @@ model customers {
   email      String @unique
   address    String
   contact    String
+  password   String
+  role       Role   @default(CUSTOMER)
 
   orders  orders[]
   cart    cart[]
@@ -99,4 +101,9 @@ enum PaymentMethod {
   MPESA
   PAYPAL
   STRIPE
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
 }
