@@ -8,8 +8,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { Role } from 'generated/prisma';
 import { PrismaService } from '../prisma/prisma.service';
 import { ChangePasswordDto } from './dto/change-user.to';
 import { UpdateUserDto } from './dto/upate-user.dto';

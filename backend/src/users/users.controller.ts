@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-import { UsersService } from './users.service';
 import {
   Body,
   Controller,
@@ -13,12 +8,13 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { Role } from '@prisma/client';
+import { Role } from 'generated/prisma';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/roles-guard';
-import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Roles } from '../shared/decorators/roles.decorator';
 import { ChangePasswordDto } from './dto/change-user.to';
 import { UpdateUserDto } from './dto/upate-user.dto';
+import { UsersService } from './users.service';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('users')

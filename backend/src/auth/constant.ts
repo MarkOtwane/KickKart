@@ -1,3 +1,3 @@
 export const jwtConstants = {
-  secret: process.env.JWT_SECRET || 'sendit_jwt_secret',
+  secret: process.env.JWT_SECRET || 'kickkart_jwt_secret',
 };
