@@ -15,12 +15,12 @@ import { ChangePasswordDto } from './dto/change-user.to';
 import { UpdateUserDto } from './dto/upate-user.dto';
 
 @Injectable()
-export class UsersService {
+export class customerssService {
   constructor(private prisma: PrismaService) {}
 
-  async getProfile(userId: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
+  async getProfile(customersId: string) {
+    const customers = await this.prisma.customers.findUnique({
+      where: { id: customersId },
       select: {
         id: true,
         name: true,
@@ -31,14 +31,14 @@ export class UsersService {
       },
     });
 
-    if (!user) throw new NotFoundException('User not found');
+    if (!customers) throw new NotFoundException('customers not found');
 
-    return user;
+    return customers;
   }
 
-  async updateProfile(userId: string, dto: UpdateUserDto) {
-    return await this.prisma.user.update({
-      where: { id: userId },
+  async updateProfile(customersId: string, dto: UpdateUserDto) {
+    return await this.prisma.customers.update({
+      where: { id: customersId },
       data: {
         name: dto.name,
         phone: dto.phone,
@@ -46,41 +46,45 @@ export class UsersService {
     });
   }
 
-  async changePassword(userId: string, dto: ChangePasswordDto) {
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
-    if (!user) throw new NotFoundException('User not found');
+  async changePassword(customerID: string, dto: ChangePasswordDto) {
+    const customers = await this.prisma.customers.findUnique({
+      where: { id: customerID },
+    });
+    if (!customers) throw new NotFoundException('customers not found');
 
-    const valid = await bcrypt.compare(dto.currentPassword, user.password);
+    const valid = await bcrypt.compare(dto.currentPassword, customers.password);
     if (!valid) throw new ForbiddenException('Incorrect current password');
 
     const hashed = await bcrypt.hash(dto.newPassword, 10);
 
-    await this.prisma.user.update({
-      where: { id: userId },
+    await this.prisma.customers.update({
+      where: { id: customersID },
       data: { password: hashed },
     });
 
     return { message: 'Password updated successfully.' };
   }
 
-  async softDeleteUser(userId: string) {
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
-    if (!user) throw new NotFoundException('User not found');
-    if (user.role === Role.ADMIN)
-      throw new ForbiddenException('Admin users cannot be deleted.');
-    await this.prisma.user.update({
-      where: { id: userId },
+  async softDeletecustomers(customersId: string) {
+    const customers = await this.prisma.customers.findUnique({
+      where: { id: customersID },
+    });
+    if (!customers) throw new NotFoundException('customers not found');
+    if (customers.role === Role.ADMIN)
+      throw new ForbiddenException('Admin customerss cannot be deleted.');
+    await this.prisma.customers.update({
+      where: { id: customersId },
       data: { deletedAt: new Date() },
     });
-    return { message: 'User account deactivated.' };
+    return { message: 'customers account deactivated.' };
   }
 
-  async getAllUsers(role: Role) {
+  async getAllcustomerss(role: Role) {
     if (role !== Role.ADMIN) {
       throw new ForbiddenException('Access denied');
     }
 
-    return this.prisma.user.findMany({
+    return this.prisma.customers.findMany({
       where: { deletedAt: null },
       select: {
         id: true,
@@ -93,12 +97,12 @@ export class UsersService {
     });
   }
 
-  async getUserById(id: string, role: Role) {
+  async getcustomersById(id: string, role: Role) {
     if (role !== Role.ADMIN) {
       throw new ForbiddenException('Access denied');
     }
 
-    const user = await this.prisma.user.findUnique({
+    const customers = await this.prisma.customers.findUnique({
       where: { id, deletedAt: null },
       select: {
         id: true,
@@ -111,27 +115,27 @@ export class UsersService {
       },
     });
 
-    if (!user) {
-      throw new NotFoundException('User not found');
+    if (!customers) {
+      throw new NotFoundException('customers not found');
     }
 
-    return user;
+    return customers;
   }
 
-  async updateUser(id: string, dto: UpdateUserDto, role: Role) {
+  async updatecustomers(id: string, dto: UpdatecustomersDto, role: Role) {
     if (role !== Role.ADMIN) {
       throw new ForbiddenException('Access denied');
     }
 
-    const user = await this.prisma.user.findUnique({
+    const customers = await this.prisma.customers.findUnique({
       where: { id, deletedAt: null },
     });
 
-    if (!user) {
-      throw new NotFoundException('User not found');
+    if (!customers) {
+      throw new NotFoundException('customers not found');
     }
 
-    const updated = await this.prisma.user.update({
+    const updated = await this.prisma.customers.update({
       where: { id },
       data: {
         name: dto.name,
@@ -151,26 +155,26 @@ export class UsersService {
     return updated;
   }
 
-  async deleteUser(id: string, role: Role) {
+  async deletecustomers(id: string, role: Role) {
     if (role !== Role.ADMIN) {
       throw new ForbiddenException('Access denied');
     }
 
-    const user = await this.prisma.user.findUnique({
+    const customers = await this.prisma.customers.findUnique({
       where: { id, deletedAt: null },
     });
 
-    if (!user) {
-      throw new NotFoundException('User not found');
+    if (!customers) {
+      throw new NotFoundException('customers not found');
     }
 
     // Prevent admin from deleting themselves
-    if (user.role === Role.ADMIN) {
-      throw new ForbiddenException('Cannot delete admin users');
+    if (customers.role === Role.ADMIN) {
+      throw new ForbiddenException('Cannot delete admin customerss');
     }
 
     // Soft delete by setting deletedAt timestamp
-    const deleted = await this.prisma.user.update({
+    const deleted = await this.prisma.customers.update({
       where: { id },
       data: { deletedAt: new Date() },
       select: {
@@ -182,6 +186,6 @@ export class UsersService {
       },
     });
 
-    return { message: 'User deleted successfully', user: deleted };
+    return { message: 'customers deleted successfully', customers: deleted };
   }
 }

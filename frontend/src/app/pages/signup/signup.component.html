@@ -9,12 +9,35 @@
     [formGroup]="signupForm"
     (ngSubmit)="onSubmit()"
   >
-    <input type="text" name="name" placeholder="Name" formControlName="name" />
+    <input
+      type="text"
+      name="firstName"
+      placeholder="First Name"
+      formControlName="firstName"
+    />
+    <input
+      type="text"
+      name="lastName"
+      placeholder="Last Name"
+      formControlName="lastName"
+    />
     <input
       type="email"
       name="email"
       placeholder="Email"
       formControlName="email"
+    />
+    <input
+      type="text"
+      name="address"
+      placeholder="Address"
+      formControlName="address"
+    />
+    <input
+      type="number"
+      name="contact"
+      placeholder="Phone Number"
+      formControlName="contact"
     />
     <input
       type="password"
@@ -24,4 +47,8 @@
     />
     <input type="submit" value="Signup" />
   </form>
+  <div class="card-terms">
+    <input type="checkbox" />
+    <span>I have read and agree to the <a href="">Terms of Service</a></span>
+  </div>
 </div>

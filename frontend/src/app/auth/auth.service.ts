@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../../enviroment/enviroment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,14 +9,14 @@ import { tap } from 'rxjs/operators';
 export class AuthService {
   constructor() {}
   httpClient = inject(HttpClient);
-  baserUrl = 'http:/localhost:3000/api';
+  apiUrl = environment.apiUrl;
 
   signup(data: any) {
-    return this.httpClient.post(`${this.baserUrl}/register`, data);
+    return this.httpClient.post(`${this.apiUrl}/register`, data);
   }
 
   login(data: any) {
-    return this.httpClient.post(`${this.baserUrl}/login`, data).pipe(
+    return this.httpClient.post(`${this.apiUrl}/login`, data).pipe(
       tap((result) => {
         localStorage.setItem('authUser', JSON.stringify(result));
       })

@@ -20,8 +20,11 @@ export class SignupComponent {
   router = inject(Router);
 
   public signupForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    address: new FormControl('', [Validators.required]),
+    contact: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
