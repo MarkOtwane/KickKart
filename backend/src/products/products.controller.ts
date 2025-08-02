@@ -32,3 +32,7 @@ export class ProductsController {
     return this.productsService.remove(+id);
   }
 }
+function Role(arg0: string): (target: ProductsController, propertyKey: "create", descriptor: TypedPropertyDescriptor<(createProductDto: CreateProductDto) => string>) => void | TypedPropertyDescriptor<...> {
+  throw new Error('Function not implemented.');
+}
+
