@@ -1,32 +1,57 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/require-await */
+
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   Body,
   Controller,
   Get,
-  HttpCode,
-  HttpStatus,
   Post,
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Public } from '../shared/decorators/public.decorator';
 import { AuthService } from './auth.service';
-
+import { LoginDto } from './dtos/login.dto';
+import { RegisterDto } from './dtos/register.dto';
+import { ResetPasswordDto } from './dtos/reset-password.dto';
+import { UpdatePasswordDto } from './dtos/update-password.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @HttpCode(HttpStatus.OK)
-  @Post('login')
-  signIn(@Body() signInDto: Record<string, any>) {
-    return this.authService.signIn(signInDto.email, signInDto.password);
+  @Public()
+  @Post('register')
+  async register(@Body() dto: RegisterDto) {
+    return this.authService.register(dto);
   }
 
-  @UseGuards(AuthGuard)
+  @Public()
+  @Post('login')
+  async login(@Body() dto: LoginDto) {
+    return this.authService.login(dto);
+  }
+
+  @Public()
+  @Post('reset-password-request')
+  async resetPassword(@Body() dto: ResetPasswordDto) {
+    return this.authService.resetPasswordRequest(dto);
+  }
+
+  @Public()
+  @Post('update-password')
+  async updatePassword(@Body() dto: UpdatePasswordDto) {
+    return this.authService.updatePassword(dto);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
+  async getProfile(@Request() req: any) {
+    return {
+      userId: req.user?.sub,
+      role: req.user?.role,
+      message: 'Access granted to protected profile route.',
+    };
   }
 }
