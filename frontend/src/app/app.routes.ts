@@ -1,26 +1,52 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './auth/auth.guard';
-import { AdminComponent } from './pages/admin/admin.component';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
+    loadComponent: () =>
+      import('./auth/login/login.component').then((m) => m.LoginComponent),
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: 'register',
+    loadComponent: () =>
+      import('./auth/register/register.component').then(
+        (m) => m.RegisterComponent
+      ),
   },
-  {
-    path: 'signup',
-    component: SignupComponent,
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [authGuard],
-  },
+  // {
+  //   path: 'dashboard',
+  //   loadComponent: () =>
+  //     import('./features/dashboard/dashboard.component').then(
+  //       (m) => m.DashboardComponent
+  //     ),
+  // },
+  // {
+  //   path: 'admin',
+  //   loadComponent: () =>
+  //     import('./layouts/admin-layout/admin-layout.component').then(
+  //       (m) => m.AdminLayoutComponent
+  //     ),
+  //   children: [
+  //     {
+  //       path: 'users',
+  //       loadComponent: () =>
+  //         import('./admin/users/users.component').then((m) => m.UsersComponent),
+  //     },
+  //     {
+  //       path: 'settings',
+  //       loadComponent: () =>
+  //         import('./admin/settings/settings.component').then(
+  //           (m) => m.SettingsComponent
+  //         ),
+  //     },
+  //     { path: '', redirectTo: 'users', pathMatch: 'full' },
+  //   ],
+  // },
+  // {
+  //   path: '**',
+  //   loadComponent: () =>
+  //     import('./shared/not-found/not-found.component').then(
+  //       (m) => m.NotFoundComponent
+  //     ),
+  // },
 ];
