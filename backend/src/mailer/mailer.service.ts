@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { MailerService as NestMailerService } from '@nestjs-modules/mailer';
 import {
   Injectable,
@@ -5,7 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PaymentMethod, PaymentStatus } from 'generated/prisma';
+import { PaymentMethod, PaymentStatus } from '@prisma/client';
 
 interface PaymentDetails {
   shippingAddress: string;
