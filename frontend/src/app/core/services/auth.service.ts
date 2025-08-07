@@ -66,15 +66,21 @@ export class AuthService {
     email: string;
     password: string;
   }): Promise<any> {
+    // Map 'name' to 'fullName' for backend compatibility
+    const payload = {
+      fullName: data.name,
+      email: data.email,
+      password: data.password,
+    };
     const res = await firstValueFrom(
-      this.http.post<any>(`${API}/register`, data)
+      this.http.post<any>(`${API}/register`, payload)
     );
     const responseData = res.data || res;
     if (!responseData.access_token) throw new Error('No access token');
 
-    const payload = this.decodeJwt(responseData.access_token);
+    const decodedPayload = this.decodeJwt(responseData.access_token);
     localStorage.setItem('access_token', responseData.access_token);
-    return { ...payload, token: responseData.access_token };
+    return { ...decodedPayload, token: responseData.access_token };
   }
 
   async requestResetPassword(email: string): Promise<void> {
