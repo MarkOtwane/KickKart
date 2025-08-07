@@ -27,6 +27,13 @@ export const routes: Routes = [
   //       (m) => m.DashboardComponent
   //     ),
   // },
+  {
+    path: 'admin/dashboard',
+    loadComponent: () =>
+      import('./admin/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
+  },
   // {
   //   path: 'admin',
   //   loadComponent: () =>

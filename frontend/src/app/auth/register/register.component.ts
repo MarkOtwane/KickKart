@@ -31,10 +31,6 @@ export class RegisterComponent {
       {
         name: ['', [Validators.required, Validators.minLength(2)]],
         email: ['', [Validators.required, Validators.email]],
-        phone: [
-          '',
-          [Validators.required, Validators.pattern(/^\+?[1-9]\d{1,14}$/)],
-        ],
         password: [
           '',
           [
@@ -70,7 +66,7 @@ export class RegisterComponent {
       this.loading = true;
       this.error = '';
       try {
-        const { name, email, phone, password } = this.registerForm.value;
+        const { name, email, password } = this.registerForm.value;
         console.log('Attempting registration:', {
           name,
           email,
