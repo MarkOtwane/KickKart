@@ -1,0 +1,239 @@
+<div class="create-product-container">
+  <div class="create-product-card">
+    <div class="create-product-header">
+      <h1>Create New Product</h1>
+      <p>Fill in the details below to add a new product to the store</p>
+    </div>
+
+    <div style="margin-bottom: 1rem">
+      <a [routerLink]="['/dashboard']" class="btn-primary">
+        &larr; Back to Dashboard
+      </a>
+    </div>
+
+    <form
+      [formGroup]="productForm"
+      (ngSubmit)="onSubmit()"
+      class="create-product-form"
+    >
+      <!-- Product Name -->
+      <div class="form-group">
+        <label for="name">Product Name</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          placeholder="Enter product name"
+          class="form-control"
+          [class.error]="
+            productForm.get('name')?.invalid && productForm.get('name')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            productForm.get('name')?.invalid && productForm.get('name')?.touched
+          "
+        >
+          Product name is required
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          placeholder="Enter product description"
+          class="form-control"
+          rows="3"
+          [class.error]="
+            productForm.get('description')?.invalid &&
+            productForm.get('description')?.touched
+          "
+        ></textarea>
+        <div
+          class="error-message"
+          *ngIf="
+            productForm.get('description')?.invalid &&
+            productForm.get('description')?.touched
+          "
+        >
+          Description is required
+        </div>
+      </div>
+
+      <!-- Image URL -->
+      <div class="form-group">
+        <label for="image">Image URL</label>
+        <input
+          type="text"
+          id="image"
+          formControlName="image"
+          placeholder="Enter image URL"
+          class="form-control"
+          [class.error]="
+            productForm.get('image')?.invalid &&
+            productForm.get('image')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            productForm.get('image')?.invalid &&
+            productForm.get('image')?.touched
+          "
+        >
+          Image URL is required
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select
+          id="category"
+          formControlName="category"
+          class="form-control"
+          [class.error]="
+            productForm.get('category')?.invalid &&
+            productForm.get('category')?.touched
+          "
+        >
+          <option value="" disabled selected>Select category</option>
+          <option *ngFor="let cat of categories" [value]="cat">
+            {{ cat }}
+          </option>
+        </select>
+        <div
+          class="error-message"
+          *ngIf="
+            productForm.get('category')?.invalid &&
+            productForm.get('category')?.touched
+          "
+        >
+          Category is required
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="form-group">
+        <label for="price">Price (KES)</label>
+        <input
+          type="number"
+          id="price"
+          formControlName="price"
+          placeholder="Enter product price"
+          class="form-control"
+          step="0.01"
+          [class.error]="
+            productForm.get('price')?.invalid &&
+            productForm.get('price')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            productForm.get('price')?.invalid &&
+            productForm.get('price')?.touched
+          "
+        >
+          Price is required and must be greater than 0
+        </div>
+      </div>
+
+      <!-- Brand -->
+      <div class="form-group">
+        <label for="brand">Brand</label>
+        <input
+          type="text"
+          id="brand"
+          formControlName="brand"
+          placeholder="Enter brand name"
+          class="form-control"
+          [class.error]="
+            productForm.get('brand')?.invalid &&
+            productForm.get('brand')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            productForm.get('brand')?.invalid &&
+            productForm.get('brand')?.touched
+          "
+        >
+          Brand is required
+        </div>
+      </div>
+
+      <!-- Size -->
+      <div class="form-group">
+        <label for="size">Size</label>
+        <input
+          type="text"
+          id="size"
+          formControlName="size"
+          placeholder="Enter size (e.g. S, M, L or dimensions)"
+          class="form-control"
+          [class.error]="
+            productForm.get('size')?.invalid && productForm.get('size')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            productForm.get('size')?.invalid && productForm.get('size')?.touched
+          "
+        >
+          Size is required
+        </div>
+      </div>
+
+      <!-- Stock -->
+      <div class="form-group">
+        <label for="stock">Stock Quantity</label>
+        <input
+          type="number"
+          id="stock"
+          formControlName="stock"
+          placeholder="Enter stock quantity"
+          class="form-control"
+          [class.error]="
+            productForm.get('stock')?.invalid &&
+            productForm.get('stock')?.touched
+          "
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            productForm.get('stock')?.invalid &&
+            productForm.get('stock')?.touched
+          "
+        >
+          Stock is required and must be at least 1
+        </div>
+      </div>
+
+      <!-- Status messages -->
+      <div class="error-message" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <div class="success-message" *ngIf="success">
+        {{ success }}
+      </div>
+
+      <!-- Submit button -->
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="productForm.invalid || loading"
+      >
+        <span *ngIf="loading">Creating...</span>
+        <span *ngIf="!loading">Create Product</span>
+      </button>
+    </form>
+  </div>
+</div>
