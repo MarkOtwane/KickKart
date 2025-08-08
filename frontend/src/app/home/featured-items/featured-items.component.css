@@ -1,0 +1,33 @@
+.featured {
+  padding: 2rem;
+  text-align: center;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+
+    .item {
+      img {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      h3 {
+        margin-top: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 0.85rem;
+        color: #666;
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.footer {
+  padding: 2rem;
+  background: #fff;
+  border-top: 1px solid #eee;
+  text-align: center;
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    a {
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+  }
+
+  .social-icons {
+    margin-top: 1rem;
+    a {
+      font-size: 1.2rem;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      color: #333;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+  }
+
+  p {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #888;
+  }
+}

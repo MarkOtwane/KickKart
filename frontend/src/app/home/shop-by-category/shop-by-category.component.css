@@ -1,0 +1,26 @@
+.categories {
+  padding: 2rem;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+
+    .category {
+      img {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      p {
+        margin-top: 0.75rem;
+        font-weight: 500;
+      }
+    }
+  }
+}

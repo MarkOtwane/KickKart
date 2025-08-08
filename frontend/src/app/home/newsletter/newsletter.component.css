@@ -1,0 +1,46 @@
+.newsletter {
+  background: #f8f9fa;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border-radius: 8px;
+  margin: 2rem;
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+
+  p {
+    margin: 0.5rem 0 1.5rem;
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  form {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    input {
+      padding: 0.6rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+      min-width: 250px;
+    }
+
+    button {
+      padding: 0.6rem 1rem;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background: #0056b3;
+      }
+    }
+  }
+}

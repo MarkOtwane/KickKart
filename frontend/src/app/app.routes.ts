@@ -4,6 +4,11 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
+      import('./home/home.component').then((m) => m.HomeComponent),
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
       import('./auth/login/login.component').then((m) => m.LoginComponent),
   },
   {
@@ -20,13 +25,6 @@ export const routes: Routes = [
         (m) => m.ResetPasswordComponent
       ),
   },
-  // {
-  //   path: 'dashboard',
-  //   loadComponent: () =>
-  //     import('./features/dashboard/dashboard.component').then(
-  //       (m) => m.DashboardComponent
-  //     ),
-  // },
   {
     path: 'admin/dashboard',
     loadComponent: () =>
@@ -34,33 +32,4 @@ export const routes: Routes = [
         (m) => m.DashboardComponent
       ),
   },
-  // {
-  //   path: 'admin',
-  //   loadComponent: () =>
-  //     import('./layouts/admin-layout/admin-layout.component').then(
-  //       (m) => m.AdminLayoutComponent
-  //     ),
-  //   children: [
-  //     {
-  //       path: 'users',
-  //       loadComponent: () =>
-  //         import('./admin/users/users.component').then((m) => m.UsersComponent),
-  //     },
-  //     {
-  //       path: 'settings',
-  //       loadComponent: () =>
-  //         import('./admin/settings/settings.component').then(
-  //           (m) => m.SettingsComponent
-  //         ),
-  //     },
-  //     { path: '', redirectTo: 'users', pathMatch: 'full' },
-  //   ],
-  // },
-  // {
-  //   path: '**',
-  //   loadComponent: () =>
-  //     import('./shared/not-found/not-found.component').then(
-  //       (m) => m.NotFoundComponent
-  //     ),
-  // },
 ];

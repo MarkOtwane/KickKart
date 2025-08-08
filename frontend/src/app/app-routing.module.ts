@@ -12,7 +12,7 @@ import { rolesGuard } from './core/guards/roles.guard';
 //   { path: '**', redirectTo: 'auth/login' },
 // ];
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   {
     path: 'customers',

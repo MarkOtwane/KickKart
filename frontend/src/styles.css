@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@media (max-width: 600px) {
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .items-grid,
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
